@@ -16,11 +16,11 @@ SMSSimulator is composed of six key modules:
 Option 1:
 
 1. Access the Beihang Cloud Drive link.
-2. Folder Name: Software Engineering Team - Software Project.
+2. Folder Name: [软件技术基础队-软件大作业]("https://bhpan.buaa.edu.cn/link/AAD9DEA1263FA1425A918677409097DC1D").
 3. Download the SMSSimulator.zip file.
 Option 2:
 
-1. Use GitHub SMSSsimulator.
+1. Use GitHub [SMSSsimulator]("https://github.com/dreamfortuna/SMSSimulator").
 2. Click on "Code," then select "Download ZIP."
 #### Usage Instructions
 1. For the controller, navigate to the SMSSController folder, run start.bat to open the External Stores Simulation Management System controller interface.

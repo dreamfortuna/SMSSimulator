@@ -26,7 +26,8 @@ SMSSimulator的主要构成分为 6 个部分：
 #### 使用说明
 1.  控制器使用进入 SMSSController 的文件夹，执行 start.bat 就可以打开外挂物仿真管理系统控制器界面；
 2.  在 IDEA 软件中点击 File—>Open，选择解压后的 SMSSimulator 文件夹并打开；
-3.  点击Run。
+3.  选择jdk版本11.0.20
+4.  点击Run。
 
 #### 参与贡献
 1. 感谢AJ提供的模板！！！

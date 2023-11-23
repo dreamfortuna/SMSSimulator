@@ -159,7 +159,6 @@ public class MainController extends NetClient {
             execCommandMainMode(connection, object);
             if(weaponData!=null){
                 weaponData.lockWeapons();
-                System.out.println("LOCK");
             }
         } else if (object instanceof CommandFire) {
             newCommand = true;
@@ -174,14 +173,12 @@ public class MainController extends NetClient {
             execCommandAttackMode(connection, object);
             if(weaponData!=null){
                 weaponData.lockWeapons();
-                System.out.println("LOCK");
             }
         } else if (object instanceof CommandNavigation) {
             newCommand = true;
             execCommandNavigation(connection, object);
             if(weaponData!=null){
                 weaponData.lockWeapons();
-                System.out.println("LOCK");
             }
         } else if (object instanceof Message) {
             Message message = (Message) object;
@@ -196,6 +193,7 @@ public class MainController extends NetClient {
     private void execCommandNavigation(Connection connection, Object object) {
         Callback callback = new Callback(true);
         CommandNavigation nav = (CommandNavigation) object;
+        showOutput("控制命令:设置经纬度"+nav.getLatitude()+";"+nav.getLongtitude());
         if (!mainMode.equals("Navigation")) {
             callback.setMessage("纬度设置失败");
             callback.setSuccess(false);
@@ -220,6 +218,8 @@ public class MainController extends NetClient {
     //执行收到的发射命令
     private void exeCommandcFire(Connection connection, Object object) {
         Callback callback = new Callback(false);
+        CommandFire cmd = (CommandFire) object;
+        showOutput(cmd.getCommandString());
         if (!(mainMode.equals("A/A") || mainMode.equals("A/F"))) {
             callback.setMessage("只有主模式是空空和空地才能发射武器");
             sendCallback(callback);
@@ -235,17 +235,22 @@ public class MainController extends NetClient {
             sendCallback(callback);
             return;
         }
-        CommandFire cmd = (CommandFire) object;
-        System.out.println(weaponData.getWeapon(Integer.valueOf(cmd.getHangPoints())).getStatus());
         fireCheck.FireOpenCheck(weaponData, cmd, attackMode, attackMode.equals("A/A"));
         callback.setSuccess(fireCheck.Success());
         callback.setMessage(fireCheck.Message());
         if (!fireCheck.Success()) {
             sendCallback(callback);
+            WeaponList wList = weaponData.getWeaponList();
+            wList.setAttackMode(attackMode);
+            wList.setMainMode(mainMode);
+            wList.setWow(wow);
+            wList.setOk(weaponData.isOk());
+            currentConnection.sendTCP(wList);
             return;
         }
         //执行发射命令，具体的发射流程需要在FireProcess中设置
-        fireProcess.executeFireCommand(cmd);
+        sendCallback(fireProcess.executeFireCommand(cmd));
+        //fireProcess.executeFireCommand(cmd);
         WeaponList wList = weaponData.getWeaponList();
         wList.setAttackMode(attackMode);
         wList.setMainMode(mainMode);
@@ -257,8 +262,9 @@ public class MainController extends NetClient {
     //执行收到的解锁控制命令
     private void execUnlockCommand(Connection connection, Object object) {
         CommandUnlock cmd = (CommandUnlock) object;
+        showOutput("控制指令：解锁"+cmd.getHangPoints());
         //执行解锁控制命令,具体解锁流程在UnlockProcess中设置
-        if(wow==false&&(mainMode.equals("A/A")||mainMode.equals("A/F"))&&attackMode.equals("Missile")){
+        if(!wow &&(mainMode.equals("A/A")||mainMode.equals("A/F"))&&attackMode.equals("Missile")){
 
             Callback callback=unlockProcess.executeUnlockCommand(cmd,weaponData);
             sendCallback(callback);
@@ -270,8 +276,6 @@ public class MainController extends NetClient {
                 wList.setOk(weaponData.isOk());
                 currentConnection.sendTCP(wList);
             }
-
-
             newCommand = true;
         }
         else {

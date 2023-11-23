@@ -48,18 +48,15 @@ public class FireProcess {
 
     //执行发射命令，主要的代码写到这里
     public Callback executeFireCommand(CommandFire fireCommand) {
-        Callback callback = new Callback(false);
-        //System.out.println("555");
-        System.out.println(fireCommand.getHangPoints() + fireCommand.getLanchType());
-        ///执行发射的代码可以在这里编写
+        Callback callback = new Callback(true);
         String[] hangPoint = fireCommand.getHangPoints().split(",");
         if (hangPoint.length == 1) {
             weaponData.getWeapon(Integer.valueOf(hangPoint[0])).setCurrentCount(weaponData.getWeapon(Integer.valueOf(hangPoint[0])).getCurrentCount() - fireCommand.getCount());
-            if (weaponData.getWeapon(Integer.valueOf(hangPoint[0])).getCurrentCount()==0){weaponData.getWeapon(Integer.valueOf(hangPoint[0])).setStatus("Failure");}
+            //if (weaponData.getWeapon(Integer.valueOf(hangPoint[0])).getCurrentCount()==0){weaponData.getWeapon(Integer.valueOf(hangPoint[0])).setStatus("Failure");}
         } else {
             for (String string : hangPoint) {
                 weaponData.getWeapon(Integer.valueOf(string)).setCurrentCount(0);
-                if (weaponData.getWeapon(Integer.valueOf(string)).getCurrentCount()==0){weaponData.getWeapon(Integer.valueOf(string)).setStatus("Failure");}
+                //if (weaponData.getWeapon(Integer.valueOf(string)).getCurrentCount()==0){weaponData.getWeapon(Integer.valueOf(string)).setStatus("Failure");}
             }
         }
 

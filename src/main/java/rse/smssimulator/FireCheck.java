@@ -61,6 +61,9 @@ public class FireCheck {
             for (int i=0;i<hangPoint.length;i++) {
                 int l = Integer.valueOf(hangPoint[i]);
                 k += l;
+                if(weaponData.getWeapon(l).getStatus()=="Failure"){
+                    message="武器存在故障";
+                }
                 if(weaponData.getWeapon(l).getCurrentCount()==0){
                     message="挂点"+l+"数量为0";
                     weaponData.getWeapon(l).setStatus("Failure");
@@ -83,7 +86,6 @@ public class FireCheck {
                 if (attackMode.equals("Missile") && weaponData.getWeapon(l).getStatus().equals("locked")) {
                     message = "导弹未解锁";
                     return;
-
                 }
             }
             if (k % 6 != 0) {
@@ -93,6 +95,10 @@ public class FireCheck {
         } else {
             System.out.println(weaponData.getWeapon(firstPoint).getCurrentCount());
             System.out.println(commandFire.getCount());
+
+            if(weaponData.getWeapon(firstPoint).getStatus()=="Failure"){
+                    message="武器存在故障";
+            }
             if (weaponData.getWeapon(firstPoint).getCurrentCount() < commandFire.getCount()) {
                 message = "发射数量应该小于现存数量";
                 weaponData.getWeapon(firstPoint).setStatus("Failure");

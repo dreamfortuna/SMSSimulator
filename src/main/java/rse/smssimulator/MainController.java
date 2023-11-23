@@ -189,19 +189,14 @@ public class MainController extends NetClient {
             showOutput(strMsg);
         }
         //非解锁和获取状态命令（CommandUnlock/Status）时需要在执行完命令时将解锁处重新锁定
-//        if(!((object instanceof CommandStatus)||(object instanceof CommandUnlock))){
-//            if(weaponData!=null){
-//                weaponData.lockWeapons();
-//                System.out.println("LOCK");
-//            }
-//        }
+
     }
 
     //执行收到的经纬度信息
     private void execCommandNavigation(Connection connection, Object object) {
         Callback callback = new Callback(true);
         CommandNavigation nav = (CommandNavigation) object;
-        if (!(mainMode.equals("Navigation") && (isWow()))) {
+        if (!mainMode.equals("Navigation")) {
             callback.setMessage("纬度设置失败");
             callback.setSuccess(false);
             sendCallback(callback);
@@ -264,13 +259,8 @@ public class MainController extends NetClient {
         CommandUnlock cmd = (CommandUnlock) object;
         //执行解锁控制命令,具体解锁流程在UnlockProcess中设置
         if(wow==false&&(mainMode.equals("A/A")||mainMode.equals("A/F"))&&attackMode.equals("Missile")){
-            showOutput("1111");
-            //System.out.println(weaponData.getWeapon(Integer.valueOf(cmd.getHangPoints())).getStatus());
-
-            //System.out.println(weaponData.getWeapon(Integer.valueOf(cmd.getHangPoints())).getStatus());
 
             Callback callback=unlockProcess.executeUnlockCommand(cmd,weaponData);
-            System.out.println(weaponData.getWeapon(Integer.valueOf(Integer.valueOf(cmd.getHangPoints()))).getStatus());
             sendCallback(callback);
             if (callback.isSuccess()){
                 WeaponList wList=weaponData.getWeaponList();

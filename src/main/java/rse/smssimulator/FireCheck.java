@@ -93,8 +93,6 @@ public class FireCheck {
                 return;
             }
         } else {
-            System.out.println(weaponData.getWeapon(firstPoint).getCurrentCount());
-            System.out.println(commandFire.getCount());
 
             if(weaponData.getWeapon(firstPoint).getStatus()=="Failure"){
                     message="武器存在故障";
@@ -116,14 +114,13 @@ public class FireCheck {
                 }
             }
             if (attackMode.equals("Missile") && weaponData.getWeapon(firstPoint).getStatus().equals("locked")) {
-                //System.out.println(weaponData.getWeapon(firstPoint).getStatus());
                 message = "导弹未解锁";
                 return;
 
             }
             if (attackMode.equals("Missile")) {
                 if (((missileDescendingMap ^ missileAscendingMap) != 0) && (((missileAscendingMap + (1 << firstPoint)) ^ (missileDescendingMap + (1 << (6 - firstPoint)))) != 0)) {
-                    message = "导弹必须解锁后才能发射，只能对称发射，即左翼发射后，下一个只能是右翼";
+                    message = "导弹只能对称发射，即左翼发射后，下一个只能是右翼";
                     return;
                 }
                 missileAscendingMap += 1 << firstPoint;

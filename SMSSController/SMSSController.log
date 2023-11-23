@@ -1,0 +1,7 @@
+[INFO][2023-11-23 13:53:13,742][rse.smsscontroller.MainController]外挂物管理模拟系统控制器启动！
+[INFO][2023-11-23 13:53:14,372][rse.smsscontroller.netservice.NetServer]port is 55776
+[INFO][2023-11-23 13:54:24,206][rse.smsscontroller.netservice.NetServer]connected!
+[INFO][2023-11-23 13:54:24,256][rse.smsscontroller.netservice.NetServer]外挂物模拟器连接:/127.0.0.1:51607
+[INFO][2023-11-23 13:54:25,170][rse.smsscontroller.MainController]外挂物管理模拟器：FORTUNA:192.168.48.1 注册成功!
+[INFO][2023-11-23 13:55:00,818][rse.smsscontroller.MainController]FORTUNA:192.168.48.1断开了!
+[INFO][2023-11-23 13:55:00,820][rse.smsscontroller.netservice.NetServer]disconnected!

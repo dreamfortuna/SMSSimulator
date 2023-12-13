@@ -220,6 +220,11 @@ public class MainController extends NetClient {
         Callback callback = new Callback(false);
         CommandFire cmd = (CommandFire) object;
         showOutput(cmd.getCommandString());
+        if (!weaponData.isOk()){
+            callback.setMessage("请加载武器清单");
+            sendCallback(callback);
+            return;
+        }
         if (!(mainMode.equals("A/A") || mainMode.equals("A/F"))) {
             callback.setMessage("只有主模式是空空和空地才能发射武器");
             sendCallback(callback);
@@ -315,6 +320,19 @@ public class MainController extends NetClient {
         showOutput(cmd.getCommandString());
         //如果主控命令正常执行，则向控制器返回状态
         sendCallback(true, "主状态设置成功");
+        if (mainMode.equals("BIT")){
+//            System.out.println(weaponData.isOk());
+            if (!weaponData.isOk()){
+                return;
+            }
+            int bitNumber=0;
+            for (int i = 0; i < 8; i++) {
+                if(weaponData.getWeapon(i).getStatus().equals("Failure")){
+                    bitNumber++;
+                }
+            }
+            sendCallback(true,"故障挂点数量"+bitNumber);
+        }
     }
 
 

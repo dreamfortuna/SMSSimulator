@@ -15,7 +15,7 @@ SMSSimulator的主要构成分为 6 个部分：
 
 #### 安装教程
 方案一：
-1. 进入北航云盘链接：[软件技术基础队-软件大作业](https://bhpan.buaa.edu.cn/link/AAD9DEA1263FA1425A918677409097DC1D) 
+1. 进入北航云盘链接：[软件技术基础队-软件大作业](https://bhpan.buaa.edu.cn/link/AA0C24DBAB27364942AA4C141199FADEFD) 
 2. 文件夹名：软件技术基础队-软件大作业
 3. 下载SMSSimulator.zip文件
  

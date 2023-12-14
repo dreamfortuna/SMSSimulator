@@ -16,7 +16,7 @@ SMSSimulator is composed of six key modules:
 Option 1:
 
 1. Access the Beihang Cloud Drive link.
-2. Folder Name: [软件技术基础队-软件大作业]("https://bhpan.buaa.edu.cn/link/AAD9DEA1263FA1425A918677409097DC1D").
+2. Folder Name: [软件技术基础队-软件大作业]("https://bhpan.buaa.edu.cn/link/AA0C24DBAB27364942AA4C141199FADEFD").
 3. Download the SMSSimulator.zip file.
 Option 2:
 

@@ -194,6 +194,7 @@ public class MainController extends NetClient {
         Callback callback = new Callback(true);
         CommandNavigation nav = (CommandNavigation) object;
         showOutput("控制命令:设置经纬度"+nav.getLatitude()+";"+nav.getLongtitude());
+
         if (!mainMode.equals("Navigation")) {
             callback.setMessage("纬度设置失败");
             callback.setSuccess(false);
@@ -245,17 +246,18 @@ public class MainController extends NetClient {
         callback.setMessage(fireCheck.Message());
         if (!fireCheck.Success()) {
             sendCallback(callback);
-            WeaponList wList = weaponData.getWeaponList();
-            wList.setAttackMode(attackMode);
-            wList.setMainMode(mainMode);
-            wList.setWow(wow);
-            wList.setOk(weaponData.isOk());
-            currentConnection.sendTCP(wList);
-            return;
+//            WeaponList wList = weaponData.getWeaponList();
+//            wList.setAttackMode(attackMode);
+//            wList.setMainMode(mainMode);
+//            wList.setWow(wow);
+//            wList.setOk(weaponData.isOk());
+//            currentConnection.sendTCP(wList);
+//            return;
+        }else {
+            sendCallback(fireProcess.executeFireCommand(cmd));
         }
         //执行发射命令，具体的发射流程需要在FireProcess中设置
-        sendCallback(fireProcess.executeFireCommand(cmd));
-        //fireProcess.executeFireCommand(cmd);
+//        sendCallback(fireProcess.executeFireCommand(cmd));
         WeaponList wList = weaponData.getWeaponList();
         wList.setAttackMode(attackMode);
         wList.setMainMode(mainMode);
@@ -514,4 +516,5 @@ public class MainController extends NetClient {
     public boolean isWow() {
         return wow;
     }
+
 }
